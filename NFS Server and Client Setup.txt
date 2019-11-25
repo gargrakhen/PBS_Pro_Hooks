@@ -1,0 +1,45 @@
+NFS Server
+vi /etc/selinux/config
+yum -y install nfs-utils libnfsidmap
+systemctl enable rpcbind
+systemctl start nfs-server
+systemctl start rpc-statd
+systemctl start nfs-idmapd
+systemctl start nfslock
+mkdir /PBS_HOME
+chmod 777 /PBS_HOME/
+vi /etc/exports    /PBS_HOME *(rw,sync,no_root_squash)
+exportfs -r
+showmount -e localhost
+systemctl restart nfs-server
+cd /PBS_HOME
+ll
+
+NFS Client
+vi /etc/selinux/config              Make sure selinux is disabled
+yum -y install nfs-utils libnfsidmap
+systemctl enable rpcbind
+systemctl start rpcbind
+systemctl enable nfslock
+systemctl enable nfs-server
+systemctl start nfs-server
+systemctl enable nfs-idmap
+systemctl start nfs-idmap
+systemctl start nfslock
+mkdir /PBS_HOME
+mount -o rw,hard,intr 172.29.13.9:/PBS_HOME /PBS_HOME ----For Hard mounting
+df -kh
+cd /PBS_HOME/
+ll
+touch test
+ll
+vi /etc/fstab         172.29.13.9:/PBS_HOME  /PBS_HOME nfs rw,sync,hard,intr 0 0
+cd
+umount /PBS_HOME/
+mount -av
+df -kh
+reboot
+
+
+Checking if NFS Lock deamons are running
+ps -ef | grep rpc.lockd

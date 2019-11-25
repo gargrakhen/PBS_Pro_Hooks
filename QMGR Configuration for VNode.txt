@@ -1,0 +1,36 @@
+#
+# Create nodes and set their properties.
+#
+#
+# Create and define node node1
+#
+create node fnode1
+set node fnode1 state = free
+set node fnode1 resources_available.arch = linux
+set node fnode1 resources_available.host = fnode1
+set node fnode1 resources_available.mem = 1gb
+set node fnode1 resources_available.ncpus = 2
+set node fnode1 resources_available.vnode = fnode1
+set node fnode1 resv_enable = True
+#
+# Create and define node node2
+#
+create node node2
+set node node2 state = free
+set node node2 resources_available.arch = linux
+set node node2 resources_available.host = node2
+set node node2 resources_available.mem = 1gb
+set node node2 resources_available.ncpus = 2
+set node node2 resources_available.vnode = node2
+set node node2 resv_enable = True
+#
+# Create and define node node3
+#
+create node node3
+set node node3 state = free
+set node node3 resources_available.arch = linux
+set node node3 resources_available.host = node3
+set node node3 resources_available.mem = 1gb
+set node node3 resources_available.ncpus = 2
+set node node3 resources_available.vnode = node3
+set node node3 resv_enable = True

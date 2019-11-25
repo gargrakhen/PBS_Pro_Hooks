@@ -1,0 +1,39 @@
+# Create and define queue routing_queue
+#
+create queue routing_queue
+set queue routing_queue queue_type = Route
+set queue routing_queue route_destinations = exec_queue
+#
+# Create and define queue exec_queue
+#
+create queue exec_queue
+set queue exec_queue queue_type = Execution
+set queue exec_queue resources_max.mem = 5gb
+set queue exec_queue resources_max.walltime = 02:00:00
+set queue exec_queue resources_min.mem = 1gb
+set queue exec_queue resources_min.walltime = 00:00:00
+set queue exec_queue default_chunk.mem = 1gb
+set queue exec_queue default_chunk.ncpus = 1
+set queue exec_queue enabled = True
+set queue exec_queue started = True
+#
+# Set server attributes.
+#
+set server scheduling = True
+set server default_queue = exec_queue
+set server log_events = 511
+set server mail_from = rakhen.garg@ndsu.edu
+set server query_other_jobs = True
+set server resources_default.ncpus = 1
+set server default_chunk.ncpus = 1
+set server scheduler_iteration = 600
+set server flatuid = True
+set server resv_enable = True
+set server node_fail_requeue = 310
+set server max_array_size = 10000
+set server pbs_license_min = 0
+set server pbs_license_max = 2147483647
+set server pbs_license_linger_time = 31536000
+set server eligible_time_enable = False
+set server job_history_enable = True
+set server max_concurrent_provision = 5
